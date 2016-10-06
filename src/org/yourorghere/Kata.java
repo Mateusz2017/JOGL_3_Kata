@@ -123,6 +123,18 @@ public class Kata implements GLEventListener {
         gl.glVertex3f(-2.0f,-1.0f, -6.0f);
         gl.glVertex3f( 0.0f,-1.0f, -6.0f);
         gl.glEnd();
+        
+        // Draw A Quad
+        gl.glBegin(GL.GL_QUADS);
+//            gl.glColor3f(0.5f, 0.5f, 1.0f);    // Set the current drawing color to light blue
+            gl.glVertex3f(1.0f, 1.2f, -7.0f);  // Top Left
+            gl.glVertex3f(2.0f, 1.2f, -7f);   // Top Right
+            gl.glVertex3f(2.0f, -1.2f, -7f);  // Bottom Right
+            gl.glVertex3f(1.0f, -1.2f, -7f); // Bottom Left
+                // Done Drawing The Quad
+        gl.glEnd();
+        
+        gl.glFlush();
     }
 
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
