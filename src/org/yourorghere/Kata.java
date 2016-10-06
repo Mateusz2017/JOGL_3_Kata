@@ -120,34 +120,16 @@ public class Kata implements GLEventListener {
 //        gl.glFlush();
         gl.glLoadIdentity();
   
-        gl.glBegin(GL.GL_TRIANGLES);
-       gl.glVertex3f(-1.0f, 1.0f, -6.0f);
-       gl.glVertex3f(-2.0f,-1.0f, -6.0f);
-       gl.glVertex3f( 0.0f,-1.0f, -6.0f);
-       gl.glColor3f(1.0f,0.0f,0.0f);
-       gl.glVertex3f(0.0f, 2.0f, -6.0f);
-       gl.glVertex3f(-3.0f,1.0f, -6.0f);
-       gl.glVertex3f( 3.0f,1.0f, -6.0f);
-         gl.glEnd();
-         
-        gl.glBegin(GL.GL_QUADS);
-       gl.glVertex3f(1.0f, 1.0f, -7.0f);
-       gl.glVertex3f(2.0f,1.0f, -7.0f);
-       gl.glVertex3f(2.0f,-1.0f, -7.0f);
-       gl.glVertex3f(1.0f,-1.0f, -7.0f);
-       gl.glColor3f(1.0f,3.0f,0.0f);
-       gl.glVertex3f(-3.0f, 1.17f, -7.0f);
-       gl.glVertex3f(3.0f,1.17f, -7.0f);
-       gl.glVertex3f(3.0f,-1.0f, -7.0f);
-       gl.glVertex3f(-3.0f,-1.0f, -7.0f);
-        gl.glEnd();
-        
-        gl.glBegin(GL.GL_QUADS);
-        gl.glColor3f(0.4f,0.2f,0.2f);
-        gl.glVertex3f(-2.0f, 1f, -7.0f);
-        gl.glVertex3f(-1.0f,1f, -7.0f);
-        gl.glVertex3f(-1.0f,-1.0f, -7.0f);
-        gl.glVertex3f(-2.0f,-1.0f, -7.0f);
+       float x,y,kat;
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+        gl.glVertex3f(0.0f,0.0f,-6.0f); //œrodek
+        for(kat = 0.0f; kat < (2.0f*Math.PI);
+        kat+=(Math.PI/32.0f))
+        {
+        x = 1.5f*(float)Math.sin(kat);
+        y = 1.5f*(float)Math.cos(kat);
+        gl.glVertex3f(x, y, -6.0f); //kolejne punkty
+        }
         gl.glEnd();
 
      }
