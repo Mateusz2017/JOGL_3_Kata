@@ -118,24 +118,39 @@ public class Kata implements GLEventListener {
 //
 //        // Flush all drawing operations to the graphics card
 //        gl.glFlush();
+        gl.glLoadIdentity();
+  
         gl.glBegin(GL.GL_TRIANGLES);
-        gl.glVertex3f(-1.0f, 1.0f, -6.0f);
-        gl.glVertex3f(-2.0f,-1.0f, -6.0f);
-        gl.glVertex3f( 0.0f,-1.0f, -6.0f);
-        gl.glEnd();
-        
-        // Draw A Quad
+       gl.glVertex3f(-1.0f, 1.0f, -6.0f);
+       gl.glVertex3f(-2.0f,-1.0f, -6.0f);
+       gl.glVertex3f( 0.0f,-1.0f, -6.0f);
+       gl.glColor3f(1.0f,0.0f,0.0f);
+       gl.glVertex3f(0.0f, 2.0f, -6.0f);
+       gl.glVertex3f(-3.0f,1.0f, -6.0f);
+       gl.glVertex3f( 3.0f,1.0f, -6.0f);
+         gl.glEnd();
+         
         gl.glBegin(GL.GL_QUADS);
-//            gl.glColor3f(0.5f, 0.5f, 1.0f);    // Set the current drawing color to light blue
-            gl.glVertex3f(1.0f, 1.2f, -7.0f);  // Top Left
-            gl.glVertex3f(2.0f, 1.2f, -7f);   // Top Right
-            gl.glVertex3f(2.0f, -1.2f, -7f);  // Bottom Right
-            gl.glVertex3f(1.0f, -1.2f, -7f); // Bottom Left
-                // Done Drawing The Quad
+       gl.glVertex3f(1.0f, 1.0f, -7.0f);
+       gl.glVertex3f(2.0f,1.0f, -7.0f);
+       gl.glVertex3f(2.0f,-1.0f, -7.0f);
+       gl.glVertex3f(1.0f,-1.0f, -7.0f);
+       gl.glColor3f(1.0f,3.0f,0.0f);
+       gl.glVertex3f(-3.0f, 1.17f, -7.0f);
+       gl.glVertex3f(3.0f,1.17f, -7.0f);
+       gl.glVertex3f(3.0f,-1.0f, -7.0f);
+       gl.glVertex3f(-3.0f,-1.0f, -7.0f);
         gl.glEnd();
         
-        gl.glFlush();
-    }
+        gl.glBegin(GL.GL_QUADS);
+        gl.glColor3f(0.4f,0.2f,0.2f);
+        gl.glVertex3f(-2.0f, 1f, -7.0f);
+        gl.glVertex3f(-1.0f,1f, -7.0f);
+        gl.glVertex3f(-1.0f,-1.0f, -7.0f);
+        gl.glVertex3f(-2.0f,-1.0f, -7.0f);
+        gl.glEnd();
+
+     }
 
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
     }
