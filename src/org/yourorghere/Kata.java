@@ -84,12 +84,12 @@ public class Kata implements GLEventListener {
 
     public void display(GLAutoDrawable drawable) {
         GL gl = drawable.getGL();
-//
-//        // Clear the drawing area
-//        gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
-//        // Reset the current matrix to the "identity"
-//        gl.glLoadIdentity();
-//
+
+        // Clear the drawing area
+        gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
+        // Reset the current matrix to the "identity"
+        gl.glLoadIdentity();
+
 //        // Move the "drawing cursor" around
 //        gl.glTranslatef(-1.5f, 0.0f, -6.0f);
 //
