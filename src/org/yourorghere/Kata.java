@@ -126,8 +126,8 @@ public class Kata implements GLEventListener {
         for(kat = 0.0f; kat < (2.0f*Math.PI);
         kat+=(Math.PI/32.0f))
         {
-        x = 1.5f*(float)Math.sin(kat);
-        y = 1.5f*(float)Math.cos(kat);
+        x = 2.2f*(float)Math.sin(kat);
+        y = 2.2f*(float)Math.cos(kat);
         gl.glVertex3f(x, y, -6.0f); //kolejne punkty
         }
         gl.glEnd();
