@@ -84,55 +84,30 @@ public class Kata implements GLEventListener {
 
     public void display(GLAutoDrawable drawable) {
         GL gl = drawable.getGL();
-
+        
         // Clear the drawing area
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
+        
         // Reset the current matrix to the "identity"
         gl.glLoadIdentity();
+        
+        kolko(gl, 0.0f, 0.0f, -5.0f, 2.0f);
 
-//        // Move the "drawing cursor" around
-//        gl.glTranslatef(-1.5f, 0.0f, -6.0f);
-//
-//        // Drawing Using Triangles
-//        gl.glBegin(GL.GL_TRIANGLES);
-//            gl.glColor3f(1.0f, 0.0f, 0.0f);    // Set the current drawing color to red
-//            gl.glVertex3f(0.0f, 1.0f, 0.0f);   // Top
-//            gl.glColor3f(0.0f, 1.0f, 0.0f);    // Set the current drawing color to green
-//            gl.glVertex3f(-1.0f, -1.0f, 0.0f); // Bottom Left
-//            gl.glColor3f(0.0f, 0.0f, 1.0f);    // Set the current drawing color to blue
-//            gl.glVertex3f(1.0f, -1.0f, 0.0f);  // Bottom Right
-//        // Finished Drawing The Triangle
-//        gl.glEnd();
-//
-//        // Move the "drawing cursor" to another position
-//        gl.glTranslatef(3.0f, 0.0f, 0.0f);
-//        // Draw A Quad
-//        gl.glBegin(GL.GL_QUADS);
-//            gl.glColor3f(0.5f, 0.5f, 1.0f);    // Set the current drawing color to light blue
-//            gl.glVertex3f(-1.0f, 1.0f, 0.0f);  // Top Left
-//            gl.glVertex3f(1.0f, 1.0f, 0.0f);   // Top Right
-//            gl.glVertex3f(1.0f, -1.0f, 0.0f);  // Bottom Right
-//            gl.glVertex3f(-1.0f, -1.0f, 0.0f); // Bottom Left
-//        // Done Drawing The Quad
-//        gl.glEnd();
-//
-//        // Flush all drawing operations to the graphics card
-//        gl.glFlush();
-        gl.glLoadIdentity();
-  
-       float x,y,kat;
+        // Flush all drawing operations to the graphics card
+        gl.glFlush();
+    }
+    
+    public void kolko(GL gl, float X, float Y, float Z, float m) {
+        float x,y,kat;
         gl.glBegin(GL.GL_TRIANGLE_FAN);
-        gl.glVertex3f(0.0f,0.0f,-6.0f); //œrodek
-        for(kat = 0.0f; kat < (2.0f*Math.PI);
-        kat+=(Math.PI/32.0f))
-        {
-        x = 2.2f*(float)Math.sin(kat);
-        y = 2.2f*(float)Math.cos(kat);
-        gl.glVertex3f(x, y, -6.0f); //kolejne punkty
+        gl.glVertex3f(X, Y, Z);
+        for(kat = 0.0f; kat < (2.0f*Math.PI); kat+=(Math.PI/32.0f)) {
+        x = m*(float)Math.sin(kat);
+        y = m*(float)Math.cos(kat);
+        gl.glVertex3f(x, y, Z);
         }
         gl.glEnd();
-
-     }
+    }
 
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
     }
