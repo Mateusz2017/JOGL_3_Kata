@@ -191,69 +191,74 @@ public class Kata implements GLEventListener {
         gl.glLightfv(GL.GL_LIGHT0,GL.GL_SPECULAR,specular,0); //?wiat?o odbite
         gl.glLightfv(GL.GL_LIGHT0,GL.GL_POSITION,lightPos,0); //pozycja ?wiat?a
         
-        rysowanieOstroslupa(gl);
+        rysowanieWalca(gl);
         gl.glFlush();
     }
 
-    public void rysowanieOstroslupa(GL gl){
-        gl.glBegin(GL.GL_QUADS);//podstawa
-        
-            float[] podstawa={-1.0f,-1.0f,1.0f,
-                                -1.0f,-1.0f,1.0f,
-                                1.0f,-1.0f,-1.0f};
-            float[] norm1=WyznaczNormalna(podstawa, 0, 3, 6);
-            gl.glNormal3fv(norm1,0);
-            gl.glColor3f(0.1f,0.4f,1.0f);
-            gl.glVertex3f(-1.0f,-1.0f,1.0f);
-            gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-            gl.glVertex3f(1.0f,-1.0f,-1.0f);
-            gl.glVertex3f(1.0f,-1.0f,1.0f);
-        gl.glEnd();
-        gl.glBegin(GL.GL_TRIANGLES);
-            float[] sciana1={-1.0f,-1.0f,1.0f,
-                                1.0f,-1.0f,1.0f,
-                                0.0f, 0.0f, 0.0f};
-            float[] norm2=WyznaczNormalna(sciana1, 0, 3, 6);
-            gl.glNormal3fv(norm2,0);
-            gl.glColor3f(0.3f,0.1f,0.5f);
-            gl.glVertex3f(-1.0f,-1.0f,1.0f);
-            gl.glVertex3f(1.0f,-1.0f,1.0f);
-            gl.glVertex3f(0.0f, 0.0f, 0.0f);
-        gl.glEnd();
-        gl.glBegin(GL.GL_TRIANGLES);
-            float[] sciana2={1.0f,-1.0f,1.0f,
-                             1.0f,-1.0f,-1.0f,
-                             0.0f, 0.0f, 0.0f};
-            float[] norm3=WyznaczNormalna(sciana2, 0, 3, 6);
-            gl.glNormal3fv(norm3,0);
-            gl.glColor3f(0.6f,0.2f,0.8f);
-            gl.glVertex3f(1.0f,-1.0f,1.0f);
-            gl.glVertex3f(1.0f,-1.0f,-1.0f);
-            gl.glVertex3f(0.0f, 0.0f, 0.0f);
-        gl.glEnd();
-        gl.glBegin(GL.GL_TRIANGLES);
-            float[] sciana3={1.0f,-1.0f,-1.0f,
-                             -1.0f,-1.0f,-1.0f,
-                             0.0f, 0.0f, 0.0f};
-            float[] norm4=WyznaczNormalna(sciana3, 0, 3, 6);
-            gl.glNormal3fv(norm4,0);
-            gl.glColor3f(0.2f,0.2f,0.2f);
-            gl.glVertex3f(1.0f,-1.0f,-1.0f);
-            gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-            gl.glVertex3f(0.0f, 0.0f, 0.0f);
-        gl.glEnd();
-        gl.glBegin(GL.GL_TRIANGLES);
-            float[] sciana4={-1.0f,-1.0f,-1.0f,
-                             -1.0f,-1.0f,1.0f,
-                             0.0f, 0.0f, 0.0f};
-            float[] norm5=WyznaczNormalna(sciana4, 0, 3, 6);
-            gl.glNormal3fv(norm5,0);
-            gl.glColor3f(0.1f,0.8f,0.3f);
-            gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-            gl.glVertex3f(-1.0f,-1.0f,1.0f);
-            gl.glVertex3f(0.0f, 0.0f, 0.0f);
-        gl.glEnd();
+     public void rysowanieWalca(GL gl){
+        float kat, p, q;
+        float x=0.0f;
+        float z=0.0f;
+        float s=1.0f;
+        gl.glColor3f(0.01f,0.7f,0.3f);
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+                p = x+s*(float)Math.sin(Math.PI*(31/32));
+                q = z+s*(float)Math.cos(Math.PI*(31/32));
+                float[] podstawa1={x,-1.0f,z,
+                                0.0f,-1.0f,1.0f,
+                                p,-1.0f,q};
+                float[] norm1=WyznaczNormalna(podstawa1, 0, 3, 6);
+                gl.glNormal3fv(norm1,0);
+            gl.glVertex3f(x,-1.0f,z); //?rodek
+            for(kat = (float) (2.0f*Math.PI); kat >0.0f;kat-=(Math.PI/32.0f))
+            {
+                p = x+s*(float)Math.sin(kat);
+                q = z+s*(float)Math.cos(kat);
+                
+                gl.glVertex3f(p, -1.0f, q); //kolejne punkty
+            }
             
+        gl.glEnd();
+        gl.glColor3f(0.01f,0.3f,0.5f);
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+                p = x+s*(float)Math.sin(Math.PI*(1/32));
+                q = z+s*(float)Math.cos(Math.PI*(1/32));
+                float[] podstawa2={x,2.0f,z,
+                                0.0f,2.0f,1.0f,
+                                p,2.0f,q};
+                float[] norm2=WyznaczNormalna(podstawa2, 0, 3, 6);
+                gl.glNormal3fv(norm2,0);
+            gl.glVertex3f(x,2.0f,z); //?rodek
+            for(kat = 0.0f; kat < (2.0f*Math.PI);kat+=(Math.PI/32.0f))
+            {
+                p = x+s*(float)Math.sin(kat);
+                q = z+s*(float)Math.cos(kat);
+                gl.glVertex3f(p, 2.0f, q); //kolejne punkty
+            }
+        gl.glEnd();
+        gl.glColor3f(0.6f,0.3f,0.2f);
+        gl.glBegin(GL.GL_QUAD_STRIP);
+            float[] kraw1={0.0f,2.0f,1.0f,
+                           0.0f,-1.0f,1.0f,
+                           0.0f,0.0f,0.0f};
+            float[] norm3=WyznaczNormalna(kraw1, 0, 3, 6);
+            gl.glNormal3fv(norm3,0);
+            float prev[]={0.0f,2.0f,1.0f};
+            for(kat = 0.0f; kat < (2.0f*Math.PI);kat+=(Math.PI/12.0f))
+            {
+                p = x+s*(float)Math.sin(kat);
+                q = z+s*(float)Math.cos(kat);
+                float[] kraw={p,2.0f,q,
+                           p,-1.0f,q,
+                           prev[0],prev[1],prev[2]};
+                float[] norm=WyznaczNormalna(kraw, 0, 3, 6);
+                gl.glNormal3fv(norm,0);
+                prev[0]=p;
+                prev[2]=q;
+                gl.glVertex3f(p, 2.0f, q); //kolejne punkty
+                gl.glVertex3f(p, -1.0f, q); //kolejne punkty
+            }
+        gl.glEnd();
     }
     
     
