@@ -191,88 +191,73 @@ public class Kata implements GLEventListener {
         gl.glLightfv(GL.GL_LIGHT0,GL.GL_SPECULAR,specular,0); //?wiat?o odbite
         gl.glLightfv(GL.GL_LIGHT0,GL.GL_POSITION,lightPos,0); //pozycja ?wiat?a
         
-        rysowanieSzescianu(gl);
+        rysowanieOstroslupa(gl);
         gl.glFlush();
     }
-    
-   
-    public void rysowanieSzescianu(GL gl){
-        float[] sciana1={-1.0f,-1.0f,1.0f,
-                        1.0f,-1.0f,1.0f,
-                        1.0f,1.0f,1.0f};
-        gl.glBegin(GL.GL_QUADS);
-            //?ciana przednia
-            float[] norm1=WyznaczNormalna(sciana1, 0, 3, 6);
+
+    public void rysowanieOstroslupa(GL gl){
+        gl.glBegin(GL.GL_QUADS);//podstawa
+        
+            float[] podstawa={-1.0f,-1.0f,1.0f,
+                                -1.0f,-1.0f,1.0f,
+                                1.0f,-1.0f,-1.0f};
+            float[] norm1=WyznaczNormalna(podstawa, 0, 3, 6);
             gl.glNormal3fv(norm1,0);
-            gl.glColor3f(1.0f,0.0f,0.0f);
-            gl.glVertex3f(-1.0f,-1.0f,1.0f);
-            gl.glVertex3f(1.0f,-1.0f,1.0f);
-            gl.glVertex3f(1.0f,1.0f,1.0f);
-            gl.glVertex3f(-1.0f,1.0f,1.0f);
-
-
-            float[] sciana2={-1.0f,1.0f,-1.0f,
-                        1.0f,1.0f,-1.0f,
-                        1.0f,-1.0f,-1.0f};
-            float[] norm2=WyznaczNormalna(sciana2, 0, 3, 6);
-            gl.glNormal3fv(norm2,0);
-            //sciana tylnia
-            gl.glColor3f(0.5f,1.3f,1.5f);
-            gl.glVertex3f(-1.0f,1.0f,-1.0f);
-            gl.glVertex3f(1.0f,1.0f,-1.0f);
-            gl.glVertex3f(1.0f,-1.0f,-1.0f);
-            gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-            //?ciana lewa
-            float[] sciana3={-1.0f,-1.0f,-1.0f,
-                        -1.0f,-1.0f,1.0f,
-                        -1.0f,1.0f,1.0f};
-            float[] norm3=WyznaczNormalna(sciana3, 0, 3, 6);
-            gl.glNormal3fv(norm3,0);
-            gl.glColor3f(0.2f,0.1f,1.0f);
-            gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-            gl.glVertex3f(-1.0f,-1.0f,1.0f);
-            gl.glVertex3f(-1.0f,1.0f,1.0f);
-            gl.glVertex3f(-1.0f,1.0f,-1.0f);
-            //?ciana prawa
-            float[] sciana4={1.0f,1.2f,-1.0f,
-                        1.0f,1.0f,1.0f,
-                        1.0f,-1.0f,1.0f};
-            float[] norm4=WyznaczNormalna(sciana4, 0, 3, 6);
-            gl.glNormal3fv(norm4,0);
-            
-            gl.glColor3f(1.0f,1.0f,0.0f);
-            gl.glVertex3f(1.0f,1.0f,-1.0f);
-            gl.glVertex3f(1.0f,1.0f,1.0f);
-            gl.glVertex3f(1.0f,-1.0f,1.0f);
-            gl.glVertex3f(1.0f,-1.0f,-1.0f);
-            //?ciana dolna
-            float[] sciana5={-1.0f,-0.4f,1.0f,
-                        -1.0f,-1.0f,-1.0f,
-                        1.0f,-1.0f,-1.0f};
-            float[] norm5=WyznaczNormalna(sciana5, 0, 3, 6);
-            gl.glNormal3fv(norm5,0);
-            
-            gl.glColor3f(1.0f,0.0f,1.0f);
+            gl.glColor3f(0.1f,0.4f,1.0f);
             gl.glVertex3f(-1.0f,-1.0f,1.0f);
             gl.glVertex3f(-1.0f,-1.0f,-1.0f);
             gl.glVertex3f(1.0f,-1.0f,-1.0f);
             gl.glVertex3f(1.0f,-1.0f,1.0f);
-            //?ciana górna
-            float[] sciana6={1.0f,1.0f,1.0f,
-                        1.0f,1.0f,-1.0f,
-                        -1.0f,1.0f,-1.0f};
-            float[] norm6=WyznaczNormalna(sciana6, 0, 3, 6);
-            gl.glNormal3fv(norm6,0);
-            
-            gl.glColor3f(2.0f,0.4f,1.0f);
-            gl.glVertex3f(1.0f,1.0f,1.0f);
-            gl.glVertex3f(1.0f,1.0f,-1.0f);
-            gl.glVertex3f(-1.0f,1.0f,-1.0f);
-            gl.glVertex3f(-1.0f,1.0f,1.0f);
         gl.glEnd();
-
+        gl.glBegin(GL.GL_TRIANGLES);
+            float[] sciana1={-1.0f,-1.0f,1.0f,
+                                1.0f,-1.0f,1.0f,
+                                0.0f, 0.0f, 0.0f};
+            float[] norm2=WyznaczNormalna(sciana1, 0, 3, 6);
+            gl.glNormal3fv(norm2,0);
+            gl.glColor3f(0.3f,0.1f,0.5f);
+            gl.glVertex3f(-1.0f,-1.0f,1.0f);
+            gl.glVertex3f(1.0f,-1.0f,1.0f);
+            gl.glVertex3f(0.0f, 0.0f, 0.0f);
+        gl.glEnd();
+        gl.glBegin(GL.GL_TRIANGLES);
+            float[] sciana2={1.0f,-1.0f,1.0f,
+                             1.0f,-1.0f,-1.0f,
+                             0.0f, 0.0f, 0.0f};
+            float[] norm3=WyznaczNormalna(sciana2, 0, 3, 6);
+            gl.glNormal3fv(norm3,0);
+            gl.glColor3f(0.6f,0.2f,0.8f);
+            gl.glVertex3f(1.0f,-1.0f,1.0f);
+            gl.glVertex3f(1.0f,-1.0f,-1.0f);
+            gl.glVertex3f(0.0f, 0.0f, 0.0f);
+        gl.glEnd();
+        gl.glBegin(GL.GL_TRIANGLES);
+            float[] sciana3={1.0f,-1.0f,-1.0f,
+                             -1.0f,-1.0f,-1.0f,
+                             0.0f, 0.0f, 0.0f};
+            float[] norm4=WyznaczNormalna(sciana3, 0, 3, 6);
+            gl.glNormal3fv(norm4,0);
+            gl.glColor3f(0.2f,0.2f,0.2f);
+            gl.glVertex3f(1.0f,-1.0f,-1.0f);
+            gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+            gl.glVertex3f(0.0f, 0.0f, 0.0f);
+        gl.glEnd();
+        gl.glBegin(GL.GL_TRIANGLES);
+            float[] sciana4={-1.0f,-1.0f,-1.0f,
+                             -1.0f,-1.0f,1.0f,
+                             0.0f, 0.0f, 0.0f};
+            float[] norm5=WyznaczNormalna(sciana4, 0, 3, 6);
+            gl.glNormal3fv(norm5,0);
+            gl.glColor3f(0.1f,0.8f,0.3f);
+            gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+            gl.glVertex3f(-1.0f,-1.0f,1.0f);
+            gl.glVertex3f(0.0f, 0.0f, 0.0f);
+        gl.glEnd();
+            
     }
+    
     
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
     }
 }
+
