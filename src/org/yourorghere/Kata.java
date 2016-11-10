@@ -194,30 +194,46 @@ public class Kata implements GLEventListener {
         gl.glLightfv(GL.GL_LIGHT1,GL.GL_SPECULAR,specular,inf); //?wiat?o odbite
         gl.glLightfv(GL.GL_LIGHT1,GL.GL_POSITION,lightPos,inf); //pozycja ?wiat?a
         */
-
-        print(gl);
+            gl.glPushMatrix();
+            for(int i=0; i<10; i++){
+                gl.glPushMatrix();
+                print(gl);
+                gl.glPopMatrix();
+                 gl.glTranslatef(3f, 0.0f, 0f);
+            }
+            
+             gl.glPopMatrix();
+                gl.glTranslatef(0f, 0.0f, 2.0f);
+            for(int j=0; j<10; j++){
+                gl.glPushMatrix();
+                print(gl);
+                gl.glPopMatrix();
+                gl.glTranslatef(3f, 0.0f, 0.0f);
+            }
         gl.glFlush();
     }
     
     public void print(GL gl){
-        gl.glColor3f(0.10f,0.35f,0.13f);
-        gl.glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
-        gl.glTranslatef(0.0f,0.0f,-1.0f);
-        gl.glScalef(0.8f, 0.8f, 0.8f);
-        stozek(gl);
-        gl.glColor3f(0.20f,0.55f,0.13f);
-        gl.glTranslatef(0.0f,0.0f,1.0f);
-        gl.glScalef(1.2f, 1.2f, 1.2f);
-        stozek(gl);
-        gl.glColor3f(0.20f,0.55f,0.13f);
-        gl.glTranslatef(0.0f,0.0f,1.0f);
-        gl.glScalef(1.2f, 1.2f, 1.2f);
-        stozek(gl);
-        gl.glScalef(0.7f, 0.7f, 0.7f);
-        gl.glTranslatef(0.0f,0.0f,1.0f);
-        gl.glColor3f(0.50f,0.24f,0.08f);
-        walec(gl);
-    }
+
+                    gl.glColor3f(0.10f,0.35f,0.13f);
+                    gl.glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
+                    gl.glTranslatef(0.0f,0.0f,-1.0f);
+                    gl.glScalef(0.8f, 0.8f, 0.8f);
+                    stozek(gl);
+                    gl.glColor3f(0.20f,0.55f,0.13f);
+                    gl.glTranslatef(0.0f,0.0f,1.0f);
+                    gl.glScalef(1.2f, 1.2f, 1.2f);
+                    stozek(gl);
+                    gl.glColor3f(0.20f,0.55f,0.13f);
+                    gl.glTranslatef(0.0f,0.0f,1.0f);
+                    gl.glScalef(1.2f, 1.2f, 1.2f);
+                    stozek(gl);
+                    gl.glScalef(0.7f, 0.7f, 0.7f);
+                    gl.glTranslatef(0.0f,0.0f,1.0f);
+                    gl.glColor3f(0.50f,0.24f,0.08f);
+                    walec(gl);
+                }
+
     public void walec(GL gl) {
 //wywo?ujemy automatyczne normalizowanie normalnych
 //bo operacja skalowania je zniekszta?ci
