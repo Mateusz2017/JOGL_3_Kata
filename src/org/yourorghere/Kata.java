@@ -144,35 +144,23 @@ public class Kata implements GLEventListener {
         gl.glViewport(0, 0, width, height);
         gl.glMatrixMode(GL.GL_PROJECTION);
         gl.glLoadIdentity();
-        glu.gluPerspective(45.0f, h, 1.0, 20.0);
+        
+        //glu.gluPerspective(1000.0f, h, 1.0, 20.0);
+        
+        float ilor;
+        if (width<=height) {
+            ilor = height/width;
+            gl.glOrtho(-10.0f,10.0f,-10.0f*ilor,10.0f*ilor,-10.0f,10.0f);
+        }
+        else {
+            ilor = width/height;
+            gl.glOrtho(-10.0f*ilor,10.0f*ilor,-10.0f,10.0f,-10.0f,10.0f);
+        }
+        
         gl.glMatrixMode(GL.GL_MODELVIEW);
         gl.glLoadIdentity();
     }
     
-    public float[] WyznaczNormalna(float[] punkty, int ind1, int ind2, int ind3) {
-        float[] norm = new float[3];
-        float[] wektor0 = new float[3];
-        float[] wektor1 = new float[3];
-
-        for (int i = 0; i < 3; i++) {
-            wektor0[i] = punkty[i + ind1] - punkty[i + ind2];
-            wektor1[i] = punkty[i + ind2] - punkty[i + ind3];
-        }
-
-        norm[0] = wektor0[1] * wektor1[2] - wektor0[2] * wektor1[1];
-        norm[1] = wektor0[2] * wektor1[0] - wektor0[0] * wektor1[2];
-        norm[2] = wektor0[0] * wektor1[1] - wektor0[1] * wektor1[0];
-        float d
-                = (float) Math.sqrt((norm[0] * norm[0]) + (norm[1] * norm[1]) + (norm[2] * norm[2]));
-        if (d == 0.0f) {
-            d = 1.0f;
-        }
-        norm[0] /= d;
-        norm[1] /= d;
-        norm[2] /= d;
-
-        return norm;
-    }
 
     public void display(GLAutoDrawable drawable) {
         GL gl = drawable.getGL();
