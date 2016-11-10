@@ -18,18 +18,14 @@ import javax.media.opengl.glu.GLU;
 
 
 
-/**
- * JOGLZad1.java <BR>
- * author: Brian Paul (converted to Java by Ron Cemer and Sven Goethel) <P>
- *
- * This version is equal to Brian Paul's version 1.2 1999/10/21
- */
+
 public class Kata implements GLEventListener {
     private static float xrot = 0.0f, yrot = 0.0f;
     static float ambientLight[] = { 0.3f, 0.3f, 0.3f, 1.0f };//swiat?o otaczajšce
     static float diffuseLight[] = { 0.7f, 0.7f, 0.7f, 1.0f };//?wiat?o rozproszone
     static float specular[] = { 1.0f, 1.0f, 1.0f, 1.0f}; //?wiat?o odbite
     static float lightPos[] = { 0.0f, 150.0f, 150.0f, 1.0f };//pozycja ?wiat?a
+    static int inf = 0;
 
     public static void main(String[] args) {
         Frame frame = new Frame("Simple JOGL Application");
@@ -132,6 +128,8 @@ public class Kata implements GLEventListener {
         
         gl.glMateriali(GL.GL_FRONT,GL.GL_SHININESS,128);
         
+        gl.glEnable(GL.GL_DEPTH_TEST); //nie jest wa¿na odleg³oœæ tylko kolejnoœæ wstawiania
+        
     }
 
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
@@ -186,83 +184,101 @@ public class Kata implements GLEventListener {
         gl.glTranslatef(0.0f, 0.0f, -6.0f); //przesuni?cie o 6 jednostek
         gl.glRotatef(xrot, 1.0f, 0.0f, 0.0f); //rotacja wokó? osi X
         gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokó? osi Y
-        gl.glLightfv(GL.GL_LIGHT0,GL.GL_AMBIENT,ambientLight,0); //swiat?o otaczajšce
-        gl.glLightfv(GL.GL_LIGHT0,GL.GL_DIFFUSE,diffuseLight,0); //?wiat?o rozproszone
-        gl.glLightfv(GL.GL_LIGHT0,GL.GL_SPECULAR,specular,0); //?wiat?o odbite
-        gl.glLightfv(GL.GL_LIGHT0,GL.GL_POSITION,lightPos,0); //pozycja ?wiat?a
-        
-        rysowanieWalca(gl);
+        gl.glLightfv(GL.GL_LIGHT0,GL.GL_AMBIENT,ambientLight,inf); //swiat?o otaczajšce
+        gl.glLightfv(GL.GL_LIGHT0,GL.GL_DIFFUSE,diffuseLight,inf); //?wiat?o rozproszone
+        gl.glLightfv(GL.GL_LIGHT0,GL.GL_SPECULAR,specular,inf); //?wiat?o odbite
+        gl.glLightfv(GL.GL_LIGHT0,GL.GL_POSITION,lightPos,inf); //pozycja ?wiat?a
+       /* 
+        gl.glLightfv(GL.GL_LIGHT1,GL.GL_AMBIENT,ambientLight,inf); //swiat?o otaczajšce
+        gl.glLightfv(GL.GL_LIGHT1,GL.GL_DIFFUSE,diffuseLight,inf); //?wiat?o rozproszone
+        gl.glLightfv(GL.GL_LIGHT1,GL.GL_SPECULAR,specular,inf); //?wiat?o odbite
+        gl.glLightfv(GL.GL_LIGHT1,GL.GL_POSITION,lightPos,inf); //pozycja ?wiat?a
+        */
+
+        print(gl);
         gl.glFlush();
     }
-
-     public void rysowanieWalca(GL gl){
-        float kat, p, q;
-        float x=0.0f;
-        float z=0.0f;
-        float s=1.0f;
-        gl.glColor3f(0.01f,0.7f,0.3f);
-        gl.glBegin(GL.GL_TRIANGLE_FAN);
-                p = x+s*(float)Math.sin(Math.PI*(31/32));
-                q = z+s*(float)Math.cos(Math.PI*(31/32));
-                float[] podstawa1={x,-1.0f,z,
-                                0.0f,-1.0f,1.0f,
-                                p,-1.0f,q};
-                float[] norm1=WyznaczNormalna(podstawa1, 0, 3, 6);
-                gl.glNormal3fv(norm1,0);
-            gl.glVertex3f(x,-1.0f,z); //?rodek
-            for(kat = (float) (2.0f*Math.PI); kat >0.0f;kat-=(Math.PI/32.0f))
-            {
-                p = x+s*(float)Math.sin(kat);
-                q = z+s*(float)Math.cos(kat);
-                
-                gl.glVertex3f(p, -1.0f, q); //kolejne punkty
-            }
-            
-        gl.glEnd();
-        gl.glColor3f(0.01f,0.3f,0.5f);
-        gl.glBegin(GL.GL_TRIANGLE_FAN);
-                p = x+s*(float)Math.sin(Math.PI*(1/32));
-                q = z+s*(float)Math.cos(Math.PI*(1/32));
-                float[] podstawa2={x,2.0f,z,
-                                0.0f,2.0f,1.0f,
-                                p,2.0f,q};
-                float[] norm2=WyznaczNormalna(podstawa2, 0, 3, 6);
-                gl.glNormal3fv(norm2,0);
-            gl.glVertex3f(x,2.0f,z); //?rodek
-            for(kat = 0.0f; kat < (2.0f*Math.PI);kat+=(Math.PI/32.0f))
-            {
-                p = x+s*(float)Math.sin(kat);
-                q = z+s*(float)Math.cos(kat);
-                gl.glVertex3f(p, 2.0f, q); //kolejne punkty
-            }
-        gl.glEnd();
-        gl.glColor3f(0.6f,0.3f,0.2f);
+    
+    public void print(GL gl){
+        gl.glColor3f(0.10f,0.35f,0.13f);
+        gl.glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
+        gl.glTranslatef(0.0f,0.0f,-1.0f);
+        gl.glScalef(0.8f, 0.8f, 0.8f);
+        stozek(gl);
+        gl.glColor3f(0.20f,0.55f,0.13f);
+        gl.glTranslatef(0.0f,0.0f,1.0f);
+        gl.glScalef(1.2f, 1.2f, 1.2f);
+        stozek(gl);
+        gl.glColor3f(0.20f,0.55f,0.13f);
+        gl.glTranslatef(0.0f,0.0f,1.0f);
+        gl.glScalef(1.2f, 1.2f, 1.2f);
+        stozek(gl);
+        gl.glScalef(0.7f, 0.7f, 0.7f);
+        gl.glTranslatef(0.0f,0.0f,1.0f);
+        gl.glColor3f(0.50f,0.24f,0.08f);
+        walec(gl);
+    }
+    public void walec(GL gl) {
+//wywo?ujemy automatyczne normalizowanie normalnych
+//bo operacja skalowania je zniekszta?ci
+        gl.glEnable(GL.GL_NORMALIZE);
+        float x, y, kat;
         gl.glBegin(GL.GL_QUAD_STRIP);
-            float[] kraw1={0.0f,2.0f,1.0f,
-                           0.0f,-1.0f,1.0f,
-                           0.0f,0.0f,0.0f};
-            float[] norm3=WyznaczNormalna(kraw1, 0, 3, 6);
-            gl.glNormal3fv(norm3,0);
-            float prev[]={0.0f,2.0f,1.0f};
-            for(kat = 0.0f; kat < (2.0f*Math.PI);kat+=(Math.PI/12.0f))
-            {
-                p = x+s*(float)Math.sin(kat);
-                q = z+s*(float)Math.cos(kat);
-                float[] kraw={p,2.0f,q,
-                           p,-1.0f,q,
-                           prev[0],prev[1],prev[2]};
-                float[] norm=WyznaczNormalna(kraw, 0, 3, 6);
-                gl.glNormal3fv(norm,0);
-                prev[0]=p;
-                prev[2]=q;
-                gl.glVertex3f(p, 2.0f, q); //kolejne punkty
-                gl.glVertex3f(p, -1.0f, q); //kolejne punkty
-            }
+        for (kat = 0.0f; kat < (2.0f * Math.PI); kat += (Math.PI / 32.0f)) {
+            x = 0.5f * (float) Math.sin(kat);
+            y = 0.5f * (float) Math.cos(kat);
+            gl.glNormal3f((float) Math.sin(kat), (float) Math.cos(kat), 0.0f);
+            gl.glVertex3f(x, y, -1.0f);
+            gl.glVertex3f(x, y, 0.0f);
+        }
+        gl.glEnd();
+        gl.glNormal3f(0.0f, 0.0f, -1.0f);
+        x = y = kat = 0.0f;
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+        gl.glVertex3f(0.0f, 0.0f, -1.0f); //srodek kola
+        for (kat = 0.0f; kat < (2.0f * Math.PI); kat += (Math.PI / 32.0f)) {
+            x = 0.5f * (float) Math.sin(kat);
+            y = 0.5f * (float) Math.cos(kat);
+            gl.glVertex3f(x, y, -1.0f);
+        }
+        gl.glEnd();
+        gl.glNormal3f(0.0f, 0.0f, 1.0f);
+        x = y = kat = 0.0f;
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+        gl.glVertex3f(0.0f, 0.0f, 0.0f); //srodek kola
+        for (kat = 2.0f * (float) Math.PI; kat > 0.0f; kat -= (Math.PI / 32.0f)) {
+            x = 0.5f * (float) Math.sin(kat);
+            y = 0.5f * (float) Math.cos(kat);
+            gl.glVertex3f(x, y, 0.0f);
+        }
         gl.glEnd();
     }
-    
-    
+
+    public void stozek(GL gl) {
+//wywo?ujemy automatyczne normalizowanie normalnych
+        gl.glEnable(GL.GL_NORMALIZE);
+        float x, y, kat;
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+        gl.glVertex3f(0.0f, 0.0f, -2.0f); //wierzcholek stozka
+        for (kat = 0.0f; kat < (2.0f * Math.PI); kat += (Math.PI / 32.0f)) {
+            x = (float) Math.sin(kat);
+            y = (float) Math.cos(kat);
+            gl.glNormal3f((float) Math.sin(kat), (float) Math.cos(kat), -2.0f);
+            gl.glVertex3f(x, y, 0.0f);
+        }
+        gl.glEnd();
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+        gl.glNormal3f(0.0f, 0.0f, 1.0f);
+        gl.glVertex3f(0.0f, 0.0f, 0.0f); //srodek kola
+        for (kat = 2.0f * (float) Math.PI; kat > 0.0f; kat -= (Math.PI / 32.0f)) {
+            x = (float) Math.sin(kat);
+            y = (float) Math.cos(kat);
+            gl.glVertex3f(x, y, 0.0f);
+        }
+        gl.glEnd();
+    }
+
+
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
     }
 }
-
