@@ -132,7 +132,7 @@ public class Kata implements GLEventListener {
         
     }
 
-    public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
+   public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
         GL gl = drawable.getGL();
         GLU glu = new GLU();
 
@@ -141,7 +141,7 @@ public class Kata implements GLEventListener {
             height = 1;
         }
         final float h = (float) width / (float) height;
-        gl.glViewport(0, 0, width, height);
+        gl.glViewport(0, 0, width/4, height/4);
         gl.glMatrixMode(GL.GL_PROJECTION);
         gl.glLoadIdentity();
         
@@ -150,11 +150,11 @@ public class Kata implements GLEventListener {
         float ilor;
         if (width<=height) {
             ilor = height/width;
-            gl.glOrtho(-10.0f,10.0f,-10.0f*ilor,10.0f*ilor,-10.0f,10.0f);
+            gl.glOrtho(-20.0f,20.0f,-20.0f*ilor,20.0f*ilor,-20.0f,20.0f);
         }
         else {
             ilor = width/height;
-            gl.glOrtho(-10.0f*ilor,10.0f*ilor,-10.0f,10.0f,-10.0f,10.0f);
+            gl.glOrtho(-20.0f*ilor,20.0f*ilor,-20.0f,20.0f,-20.0f,20.0f);
         }
         
         gl.glMatrixMode(GL.GL_MODELVIEW);
