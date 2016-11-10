@@ -144,9 +144,7 @@ public class Kata implements GLEventListener {
         gl.glViewport(0, 0, width, height);
         gl.glMatrixMode(GL.GL_PROJECTION);
         gl.glLoadIdentity();
-        
-        glu.gluPerspective(170.0f, h, 1.0, 20.0);
-
+        glu.gluPerspective(90.0f, h, 1.0, 20.0);
         gl.glMatrixMode(GL.GL_MODELVIEW);
         gl.glLoadIdentity();
     }
