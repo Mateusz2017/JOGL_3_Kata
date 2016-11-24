@@ -7,6 +7,9 @@
 package org.yourorghere;
 
 import javax.media.opengl.*;
+import static org.yourorghere.Kata.koparka_ramie_1;
+import static org.yourorghere.Kata.koparka_ramie_2;
+import static org.yourorghere.Kata.lyzka;
 
 public class Koparka {
 
@@ -50,7 +53,7 @@ public void Rysuj(GL gl)
 
     gl.glTranslatef(1.5f,0.0f,0.0f);
 
-    gl.glRotatef(45.0f,0.0f,0.0f,1.0f);
+    gl.glRotatef(koparka_ramie_1,0.0f,0.0f,1.0f);
 
     Prostopadloscian(gl,0.0f,0.0f,0.0f,3.0f,0.3f,0.3f);
 
@@ -58,7 +61,7 @@ public void Rysuj(GL gl)
 
     gl.glTranslatef(2.7f,0.0f,0.0f);
 
-    gl.glRotatef(-45.0f,0.0f,0.0f,1.0f);
+    gl.glRotatef(koparka_ramie_2,0.0f,0.0f,1.0f);
 
     Prostopadloscian(gl,0.0f,0.0f,0.0f,1.5f,0.3f,0.3f);
 
@@ -66,7 +69,7 @@ public void Rysuj(GL gl)
 
     gl.glTranslatef(1.2f,0.1f,0.0f);
 
-    gl.glRotatef(-45.0f,0.0f,0.0f,1.0f);
+    gl.glRotatef(lyzka,0.0f,0.0f,1.0f);
 
     Lyzka(gl);
 
@@ -299,5 +302,4 @@ private void Lyzka(GL gl)
     gl.glEnable(GL.GL_CULL_FACE);
 
     }
-
 }

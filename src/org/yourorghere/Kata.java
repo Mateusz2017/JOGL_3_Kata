@@ -21,6 +21,9 @@ import javax.media.opengl.glu.GLU;
 
 public class Kata implements GLEventListener {
     static Koparka koparka;
+    public static float koparka_ramie_1 = 45.0f;
+    public static float koparka_ramie_2 = -45.0f;
+    public static float lyzka = -45.0f;
     
     private static float xrot = 0.0f, yrot = 0.0f;
     static float ambientLight[] = { 0.3f, 0.3f, 0.3f, 1.0f };//swiat?o otaczajšce
@@ -65,6 +68,22 @@ public class Kata implements GLEventListener {
                 yrot += 2.0f;
                 if(e.getKeyCode() == KeyEvent.VK_LEFT)
                 yrot -=2.0f;
+                if(e.getKeyCode() == KeyEvent.VK_1)
+                     koparka_ramie_1+=1.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_2)
+                     koparka_ramie_1-=1.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_3)
+                     koparka_ramie_2+=1.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_4)
+                     koparka_ramie_2-=1.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_5)
+                     lyzka+=1.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_6)
+                     lyzka-=1.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_7)
+                     lyzka+=1.0f;
+                 if(e.getKeyCode() == KeyEvent.VK_8)
+                     lyzka-=1.0f;
                 
                 if(e.getKeyChar() == 'q')
                     ambientLight=new float[] {ambientLight[0]-0.1f, ambientLight[0]-0.1f, ambientLight[0]-0.1f, 1};
@@ -82,6 +101,8 @@ public class Kata implements GLEventListener {
                     lightPos[3]=0;
                 if(e.getKeyChar() == 'm')
                     lightPos[3]=1;
+//                if(e.getKeyCode() == KeyEvent.VK_1)
+//                    koparka.kat1+=0.1f;
             }
             public void keyReleased(KeyEvent e){}
             public void keyTyped(KeyEvent e){}
