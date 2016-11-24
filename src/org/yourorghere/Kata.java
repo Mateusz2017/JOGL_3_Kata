@@ -20,6 +20,8 @@ import javax.media.opengl.glu.GLU;
 
 
 public class Kata implements GLEventListener {
+    static Koparka koparka;
+    
     private static float xrot = 0.0f, yrot = 0.0f;
     static float ambientLight[] = { 0.3f, 0.3f, 0.3f, 1.0f };//swiat?o otaczajšce
     static float diffuseLight[] = { 0.7f, 0.7f, 0.7f, 1.0f };//?wiat?o rozproszone
@@ -91,6 +93,8 @@ public class Kata implements GLEventListener {
     }
 
     public void init(GLAutoDrawable drawable) {
+        
+        koparka = new Koparka();
         // Use debug pipeline
         // drawable.setGL(new DebugGL(drawable.getGL()));
 
@@ -170,23 +174,25 @@ public class Kata implements GLEventListener {
         gl.glLightfv(GL.GL_LIGHT1,GL.GL_SPECULAR,specular,inf); //?wiat?o odbite
         gl.glLightfv(GL.GL_LIGHT1,GL.GL_POSITION,lightPos,inf); //pozycja ?wiat?a
         */
-            gl.glPushMatrix();
-            for(int i=0; i<10; i++){
-                gl.glPushMatrix();
-                print(gl);
-                gl.glPopMatrix();
-                 gl.glTranslatef(3f, 0.0f, 0f);
-            }
-            
-             gl.glPopMatrix();
-                gl.glTranslatef(0f, 0.0f, 2.0f);
-            for(int j=0; j<10; j++){
-                gl.glPushMatrix();
-                print(gl);
-                gl.glPopMatrix();
-                gl.glTranslatef(3f, 0.0f, 0.0f);
-            }
-        gl.glFlush();
+        koparka.Rysuj(gl);
+        
+//            gl.glPushMatrix();
+//            for(int i=0; i<10; i++){
+//                gl.glPushMatrix();
+//                print(gl);
+//                gl.glPopMatrix();
+//                 gl.glTranslatef(3f, 0.0f, 0f);
+//            }
+//            
+//             gl.glPopMatrix();
+//                gl.glTranslatef(0f, 0.0f, 2.0f);
+//            for(int j=0; j<10; j++){
+//                gl.glPushMatrix();
+//                print(gl);
+//                gl.glPopMatrix();
+//                gl.glTranslatef(3f, 0.0f, 0.0f);
+//            }
+//        gl.glFlush();
     }
     
     public void print(GL gl){
